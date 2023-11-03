@@ -1,0 +1,73 @@
+Introduction to JavaScript
+=> JavaScript run on browser, browsers have engines that parses the script called JavaScript Engines
+	V8 in Chrome, Opera and Edge
+	Spider Monkey in Firefox
+	Chakra in Internet Explorer
+	
+How does engine work?
+	1. engine reads/parses the script.
+	2. compiles/converts the script to machine code.
+	3. and machine code runs pretty fast.
+	
+In browser JS doesnot have low-level access to memory, that is why it is called safe programming language. But in case of Node.js it has memory read-write access in files and databases...
+
+<---- Code Structure ---->
+ -> alert("Hello"); alert("World");
+ -> alert("Hello") alert("World")
+ -> alert(3+1+2); => 6
+ -> alert("Hello") [1,2].forEach(alert); => alert + error
+ -> alert("Hello"); [1,2].forEach(alert); => better => Hello -> 1 -> 2
+ 
+<---- Variables in JS ---->
+let/var ------>>
+ let x = "Hello"; => String
+ x = 20; => Number
+There is slight difference between let and var
+==> Data types in JS
+ -> Number => let n = 10;
+ 	     n = 12.567;
+ 	     n = 1/0; or n = Infinity; => Infinity(∞);
+ 	     n = "str"/2; or n = (NaN/2); => NaN(Not a number)
+ 	          => Here's an exception --> n = NaN ** 0; => result is 1;
+	     n = (9007199254740991 + 1); => 9007199254740992 => Number.MAX_SAFE_INTEGER = 9007199254740991
+	     											(2^53 – 1)
+	     n = (9007199254740991 + 2); => 9007199254740992
+ 
+ -> String => let str = "Hello";
+ 		str = 'Single quotes are fine as well';
+ 		str1 = "a string" + "another string";
+		str = "can embed with backquotes " + str1;
+ 		str = `can embed with backquotes ${str1}`;
+ 		
+ -> Boolean => let isGreater = true;
+ 		isGreater = 4>1;
+
+ -> Null => let age = null;
+		It is a datatype which is "not a reference to a non-existing object/value". Infact it is a datatype which contains value that represents nothing.
+		
+ -> Undefined => let age;
+		undeclared variable has a different datatype just like null.
+		age = 10; age = undefined;(explicitly defining undefined to a variable)...
+
+ -> typeof Operator => it is not a function
+		typeof undefined; => undefined
+		typeof 0 => number
+		typeof 10n => bigint
+		typeof(true) => boolean
+		typeof(Math) => object
+		typeof(null) => object
+		typeof(alert) => function
+
+Alert => mini modal window, user cannot interact with rest of the page
+	alert("How old are you?");
+Prompt => mini modal window with answer box
+	let age = prompt("How old are you?", 100); => returns second argument, and passing 2nd arg is optional
+	log(`${age}`); => 100
+Confirm => mini modal window with question box. OK and Cancel buttons
+	let isBoss = confirm("are you the boss?"); => return true or false, if OK is pressed returns true else false
+
+Type Conversions
+	alert("6"/"3"); => strings are converted to numbers
+	let str = "123"; let x = "Cannot be converted into number";
+	str = Number(str); x = Number(x); => NaN, conversion failed...
+	log(typeof(str));
