@@ -1,0 +1,363 @@
+Basic Operators
+=> unary
+=> binary
+=> Operands -> Operators are applied on Operands
+let x = 1;
+x = -x; => Here '-' is unary operator & x = -1
+
+------- Maths Operations ---------
+-> Addition +
+-> Subtraction -
+-> Multiplication *
+-> Division /
+-> Remainder %
+-> Exponentiation ** (2 ** 3 = 8 & 2 ** (1/2) = 1.4)
+
+Use of + operator
+    -> concat strings => 
+        "string1" + "string2" = "string1string2"
+        "str" + 1 = "str1" -> converts a number to string then concats
+        "str" + 1 + 2 = "str12" 
+        1 + 2 + "str" = "3str" -> adds 1 & 2 then converts the result to string then concats
+    
+    -> conversion of other datatypes to Number
+        +true = 1 => Number(true)
+        +"" = 0 => Number("")
+        let apples = "2";
+        let oranges = "3";
+        Now,
+            oranges + apples = 23; but,
+            +oranges + +apples = 5 => converts oranges to Number and apples to a Number then adds these two numbers...
+
+Operators Precedence
+
+Precedence	|    Name	         |   Sign
+____________|____________________|__________
+14	        |    unary plus	     |   +
+14	        |    unary negation	 |   -
+13	        |    exponentiation	 |   **
+12	        |    multiplication	 |   *
+12	        |    division	     |   /
+11	        |    addition	     |   +
+11	        |    subtraction	 |   -
+2	        |    assignment	     |   =
+
+Comparisons =>
+    2 > 1
+    2 != 1
+    2 == 1
+    'Z' > 'A'
+    'Glow' > 'Bee'
+    '2' > 1 => 2 becomes a number
+    '01' == 1 => 01 becomes a number
+    true == 1 => true becomes a number
+    false == "" => equality (==) converts the operands to number, so this is a problem
+    Therefore, 
+        false === 0
+        null === undefined => false
+        null == undefined => true
+    null > 0 
+    null == 0 => false
+
+# value = axios.get()
+#     value?.map(()=>{
+#     })
+
+# x = 5;
+# x >= 5 = true
+# x <= 5 = true
+
+    null >= 0 => true
+    null <= 0 => true
+
+    == operator and >, <, >=, <= works differently. The later ones convert the operand to a number and the former one, it is designed in such a way for null and undefined that it they are not equal to anything except themselves...
+    null == undefined 
+    null == null => both true...
+
+    Exercise...
+    5 > 4
+    "apple" > "pineapple"
+    "2" > "12"
+    undefined == null 
+    undefined === null
+    null == "\n0\n"
+    null === +"\n0\n"
+
+Conditional => 
+      if (age < 3) {
+        message = 'Hi, baby!';
+      } else if (age < 18) {
+        message = 'Hello!';
+      } else if (age < 100) {
+        message = 'Greetings!';
+      } else {
+        message = 'What an unusual age!';
+      }
+
+      let message = (age < 3) ? 'Hi, baby!' : (age < 18) ? 'Hello' : (age < 100) ? 'Greetings' : 'What an unusual age!';
+
+      if("0"){....} => true
+      if(""){....} => false
+      if("  "){....} => true
+
+Logical Operators =>
+      || --> returns the 1st truth value, if not found then the last false value...
+      it evaluates from left to right, converting all operands to boolean...
+        let firstName = "";
+        let lastName = "";
+        let nickName = "SuperCoder";
+        alert( firstName || lastName || nickName || "Anonymous"); => nickName
+
+        alert( 1 || 0 ); // 1 (1 is truth)
+        alert( null || 1 ); // 1 (1 is the first truth value)
+        alert( null || 0 || 1 ); // 1 (the first truth value)
+        alert( undefined || null || 0 ); // 0 (all false, returns the last value)
+
+      && --> returns the 1st false value, if not found then the last truth value...
+      it evaluates from left to right, converting all operands to boolean...
+    
+      Example for practise => 
+      -> alert( null || 2 && 3 || 4 ); -> Hint:- && has higher precedence then ||
+      -> alert( alert(1) && alert(2) ); -> alert function returns undefined
+      -> prompt(prompt("Que1?", ) && prompt("Ques2?", ), );
+
+Nullish Coalescing Operator =>
+    result = a ?? b 
+    result = (a !== undefined && a !== null) ? a : b;
+    ?? -> is generally used to give a default value if the value is null or undefined...
+
+    let height = 0;
+    if we use || operator -> alert(height || 100); => value returned is 100 (1st true value)
+    if we use ?? operator -> alert(height ?? 100); => value returned is 0, the value assigned by us, default value is not returned, so || operator is not useful in this case because in some cases height = 0 is valid but || rejects that height, therefore ?? operator is more powerful...
+
+    let height = null;
+    let width = null;
+    let area = (height ?? 100) * (width ?? 50);
+    alert(area);
+
+    ---> here paranthesis was imp because * has higher precedence than ?? and ?? and || has equal precedence
+
+Loops =>
+    Similar to JAVA or C++, only difference is, in the condition we can use any data types because the loop converts the condition to boolean and then evaluates accordingly...
+
+    Labels for break / continue =>
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                let input = prompt("Value at Co-ordinates ("+i+", "+j+')', "");
+                ---> if we want to break the outer loop as well... and move to alert statement
+                ---> just put the label on the outer loop and break that loop
+            }
+        }
+        alert('Done!');
+
+        "outer is name of the label..."
+        outer : for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                let input = prompt("Value at Co-ordinates ("+i+", "+j+')', "");
+                if(!input) break outer;
+            }
+        }
+        alert('Done!');
+
+Switch Statements => similar to another language, only condition inside switch can be anything, and values in case can be anything, and matching condition with value is done with === operator, that is strict checking...
+
+switch(condition){
+    case val1://...........break;
+    case val2:
+    case val3:
+    default:
+}
+
+condition  === val1 => true
+condition === val2 => true
+
+Functions => 
+    function showMessage() {
+        alert( 'Hello everyone!' );
+    }
+    showMessage();
+
+    --> accessing outer variables and changing it
+    let userName = 'John';
+    function showMessage() {
+        userName = "Johnny"
+        message = 'Hello, ' + userName;
+        alert(message);
+    }
+    alert(userName);
+    showMessage();
+    alert(userName);
+
+    --> Passing arguments, and 2nd as default argument
+    function showMessage(from, text = "no text given") {
+        alert( from + ": " + text );
+    }
+    showMessage("Ann");
+
+    -->
+    function anotherFunction(){
+        return "in another function";
+    }
+    function showMessage(from, text = anotherFunction()) {
+        alert("in show message"+ from + "***" +text);
+    }
+    showMessage("some from");
+    showMessage("some from", "text given");
+
+    In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter.
+    In the example above, anotherFunction() isn’t called at all, if the text parameter is provided.
+    On the other hand, it’s independently called every time when text is missing.
+
+    showMessage("Anna");
+    showMessage("Divanshu", "Hello disciples!!!");
+
+    Returning a value in a function ->
+    We can return anything from JavaScript functions, that is the power of JavaScript
+    function checkAge(age) {
+        if (age >= 18) {
+          return true;
+        } else {
+          return confirm('Do you have permission from your parents?');
+        }
+    }
+    let age = prompt('How old are you?', 18);
+    if ( checkAge(age) ) {
+        alert( 'Access granted' );
+    } else {
+        alert( 'Access denied' );
+    }
+
+    --> If a function does not return a value, it is the same as if it returns undefined:
+        function doNothing() { /* empty */ }
+        alert( doNothing() === undefined ); // true
+    --> Never add a newline between return and the value
+        return
+            ("some" + "long" + "expression" + "or" + "whatever" * f(a) + f(b))
+        This is same as
+        return;
+            (some + long + expression + or + whatever * f(a) + f(b))
+        Do this instead
+        return (
+            some + long + expression
+            + or +
+            whatever * f(a) + f(b)
+            );
+    --> Naming conventions
+        functions that start with "show" usually show something.
+        Function starting with…
+        "get…" –> return a value,
+        "calc…" –> calculate something,
+        "create…" –> create something,
+        "check…" –> check something and return a boolean, etc...
+        => One function – one action
+            A function should do exactly what is suggested by its name, no more.
+            wo independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
+            A few examples of breaking this rule:
+                getAge –> would be bad if it shows an alert with the age (should only get).
+                createForm –> would be bad if it modifies the document, adding a form to it (should only create it and return).
+                checkPermission –> would be bad if it displays the access granted/denied message (should only perform the check and return the result).
+
+        Example => 
+        function showPrimes(n) {
+            nextPrime : for (let i = 2; i < n; i++) {
+              for (let j = 2; j < i; j++) {
+                if (i % j == 0) continue nextPrime;
+              }
+              alert( i ); // a prime
+            }
+        }
+
+        function showPrimes(n) {
+            for (let i = 2; i < n; i++) {
+              if (!isPrime(i)) continue;
+              alert(i);  // a prime
+            }
+        }
+        function isPrime(n) {
+            for (let i = 2; i < n; i++) {
+              if ( n % i == 0) return false;
+            }
+            return true;
+        }
+
+Anonymous Functions =>
+    let sayHi = function() {
+        alert( "Hello" );
+    };
+Both are same......................
+    function sayHi() {
+        alert( "Hello" );
+    }
+
+    function sayHi() {  
+        alert( "Hello" );
+    }
+    let func = sayHi; 
+    func();
+    sayHi();
+
+    Callback functions =>
+        function ask(question, yes, no) {
+            if (confirm(question)) yes(); //10()
+            else no(); //12()
+        }
+        function showOk() {
+            alert( "You agreed." );
+        }
+        function showCancel() {
+            alert( "You canceled the execution." );
+        }
+        // usage: functions showOk, showCancel are passed as arguments to ask
+        ask("Do you agree?", showOk, showCancel);
+        
+        question = "Do you agree?"
+        yes = showOk;
+        no = showCancel;
+        
+        ask("Do you agree?", 10, 12);
+        question = "Do you agree?"
+        yes = 10
+        no = 12
+
+        we have to pass a function or it will give error at yes(), that is it is not a function
+
+        Anonymius Functions --->
+        function ask(question, yes, no) {
+            if (confirm(question)) yes()
+            else no();
+        }
+        ask(
+            "Do you agree?",
+            function() { alert("You agreed."); }, --> yes
+            function() { alert("You canceled the execution."); } --> no
+        );
+
+        Try----
+        let age = prompt("What is your age?", 18);
+        let welcome;
+        if (age < 18) {
+            welcome = function() {
+                alert("Hello!");
+            };
+        } else {
+            welcome = function() {
+                alert("Greetings!");
+            };
+        }   
+        welcome();
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
