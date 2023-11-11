@@ -5,6 +5,8 @@ Basic Operators
 let x = 1;
 x = -x; => Here '-' is unary operator & x = -1
 
+2-3 => binary operator --> 2 operands
+
 ------- Maths Operations ---------
 -> Addition +
 -> Subtraction -
@@ -18,7 +20,7 @@ Use of + operator
         "string1" + "string2" = "string1string2"
         "str" + 1 = "str1" -> converts a number to string then concats
         "str" + 1 + 2 = "str12" 
-        1 + 2 + "str" = "3str" -> adds 1 & 2 then converts the result to string then concats
+        1 + 2 + "str" = "3str" -> adds 1 & 2 then converts the result(3) to string then concats
     
     -> conversion of other datatypes to Number
         +true = 1 => Number(true)
@@ -28,7 +30,7 @@ Use of + operator
         Now,
             oranges + apples = 23; but,
             +oranges + +apples = 5 => converts oranges to Number and apples to a Number then adds these two numbers...
-
+                2     +      3
 Operators Precedence
 
 Precedence	|    Name	         |   Sign
@@ -58,7 +60,9 @@ Comparisons =>
         null == undefined => true
     null > 0 
     null == 0 => false
-
+    null == 0 - false
+    null == "" - false
+    null ==
 # value = axios.get()
 #     value?.map(()=>{
 #     })
@@ -71,19 +75,19 @@ Comparisons =>
     null <= 0 => true
 
     == operator and >, <, >=, <= works differently. The later ones convert the operand to a number and the former one, it is designed in such a way for null and undefined that it they are not equal to anything except themselves...
-    null == undefined 
+    null == undefined
     null == null => both true...
 
     Exercise...
     5 > 4
     "apple" > "pineapple"
     "2" > "12"
-    undefined == null 
+    undefined == null
     undefined === null
     null == "\n0\n"
     null === +"\n0\n"
 
-Conditional => 
+Conditional =>
       if (age < 3) {
         message = 'Hi, baby!';
       } else if (age < 18) {
@@ -106,7 +110,12 @@ Logical Operators =>
         let firstName = "";
         let lastName = "";
         let nickName = "SuperCoder";
-        alert( firstName || lastName || nickName || "Anonymous"); => nickName
+        let x = "Anonymous";
+        (0 || 0 || 5 || 2) ===> 1
+        (0||0||0||0) ===> 0
+        alert( firstName || lastName || nickName || x ); => nickName("SuperCoder")
+
+        alert(firstName || lastName) => lastName
 
         alert( 1 || 0 ); // 1 (1 is truth)
         alert( null || 1 ); // 1 (1 is the first truth value)
@@ -117,9 +126,12 @@ Logical Operators =>
       it evaluates from left to right, converting all operands to boolean...
     
       Example for practise => 
-      -> alert( null || 2 && 3 || 4 ); -> Hint:- && has higher precedence then ||
+      -> alert( null || 2 && 3 || 4 ); -> Hint:- && has higher precedence than ||
       -> alert( alert(1) && alert(2) ); -> alert function returns undefined
       -> prompt(prompt("Que1?", ) && prompt("Ques2?", ), );
+
+      alert -- undefined
+      prompt -- which ever 
 
 Nullish Coalescing Operator =>
     result = a ?? b 

@@ -1,0 +1,390 @@
+Arrow Functions =>
+    let func = (arg1, arg2, ..., argN) => expression;
+    This is same as
+    let func = function(arg1, arg2, ..., argN) {
+        return expression;
+    };
+
+    let age = prompt("What is your age?", 18);
+    let welcome = (age < 18) ?
+    () => alert('Hello!') :
+    () => alert("Greetings!");
+    welcome();
+
+Objects =>
+    let user = new Object(); // "object constructor" syntax
+    let user = {};  // "object literal" syntax  
+
+    Literals & Properties ==>
+        let user = {
+            name: "John",
+            age: 30
+        };
+        user.idAdmin = true; #New property added
+        delete user.name; # Existing property deleted
+
+        let user = {
+            name: "John",
+            age: 30,
+            "likes birds": true  # multiword property name must be quoted
+        };
+        user["likes girls"] = true;
+        user[address] = "Pune";
+
+        let fruit = "apple";
+        let bag = {
+            [fruit] : 5 # apple : 5
+        };
+
+        let bag = {
+            [fruit + 'Computers']: 5 # bag.appleComputers = 5
+        };
+
+        function makeUser(name, age) {
+            return {
+              name: name,
+              age: age,
+              # ...other properties
+            };
+        }
+        let user = makeUser("John", 30);
+
+        let obj = {
+            0: "test" // same as "0": "test"
+        };
+        # both alerts access the same property (the number 0 is converted to string "0")
+        alert( obj["0"] ); // test
+        alert( obj[0] ); // test (same property)
+
+        in keyword -->
+        let user = { name: "John", age: 30 };
+        alert( "age" in user ); // true, user.age exists
+        alert( "blabla" in user ); // false, user.blabla doesn't exist
+
+        let user = {
+            name: "John",
+            age: 30,
+            isAdmin: true
+        };
+        for (let key in user) {
+            // keys
+            alert( key );  // name, age, isAdmin
+            // values for the keys
+            alert( user[key] ); // John, 30, true
+        }
+
+        Just like our foreach loop in JAVA
+
+        For PhoneCodes -->>
+        let codes = {
+            "+49": "Germany",
+            "+41": "Switzerland",
+            "+44": "Great Britain",
+            // ..,
+            "+1": "USA"
+        };
+          
+        for (let code in codes) {
+            alert( +code ); // 49, 41, 44, 1
+        }
+
+Copy & References =>
+        let msg = "Hi";
+        let copy = msg;
+        Simply value is copied...
+        i.e., copy by value
+
+        let user = { name: "John" };
+        let admin = user; // copy the reference
+        user == admin;
+        user === admin;
+
+        let a = {}
+        let b = {}
+        a == b; false
+
+        Cloning ===>
+            let user = {
+                name: "John",
+                age: 30
+            };
+            let clone = {}; // the new empty object
+            // let's copy all user properties into it
+            for (let key in user) {
+                clone[key] = user[key];
+            }
+
+            Object.assign(destination, ...sources);
+            let clone  = Object.assign({}, user);
+            let clone = {...user}; #Spread operator -> will see later
+
+            #if we need to give more properties to user
+            Object.assign(user, {id:1}, {class:"10th"});
+
+            But this cloning is not enough if the properties inside the object are references and not primitives
+            let user = {
+                name: "John",
+                sizes: {
+                  height: 182,
+                  width: 50
+                }
+            };
+            let clone = Object.assign({}, user);
+            alert( user.sizes === clone.sizes ); --> true => sizes of both the object's reference's share the same memory location
+
+            structuredClone() =>
+            let user = {
+                name: "John",
+                sizes: {
+                  height: 182,
+                  width: 50
+                }
+            };
+            let clone = structuredClone(user);
+            clone.sizes === user.sizes; false => good for copying the arrays, references and primitives...
+
+            struncturedClone failure -->
+            function hi(){
+                alert("HI")
+            };
+            let user = {
+                f : hi
+            }
+            let clone = structuredClone(user);
+            clone.f;
+
+Object Methods =>
+    let user = {
+        name: "John",
+        age: 30
+    };
+    user.sayHi = function() {
+        alert("Hello!");
+    };
+
+    Similarly,
+    let user = {
+        // ...
+    };
+    // first, declare
+    function sayHi() {
+        alert("Hello!");
+    }
+    // then add as a method
+    user.sayHi = sayHi;
+
+    Now inside user
+    user = {
+        sayHi: function() {
+          alert("Hello");
+        }
+    };
+    user = {
+        sayHi() {
+          alert("Hello");
+        }
+    };
+
+    this keyword -->
+    let user = {
+        name: "John",
+        age: 30,
+        sayHi() {
+          alert(this.name); #user.name
+        }
+    };
+
+    user.sayHi();
+    user['sayHi']();
+
+New operator =>
+#Constructor
+    function User(name) {
+        this.name = name;
+        this.isAdmin = false;
+    }
+    let user = new User("Jack");
+    alert(user.name); // Jack
+    alert(user.isAdmin); // false
+
+    When a function is executed with new, it does the following steps:
+    - A new empty object is created and assigned to this.
+    - The function body executes. Usually it modifies this, adds new properties to it.
+    - The value of this is returned.
+
+    Now if we want to create other users, we can call new User("Ann"), new User("Alice") and so on. Much shorter than using literals every time, and also easy to read.
+
+Arrays =>
+    let arr = [1,2,3,4];
+    let arr = new Array(1,2,3,4);
+
+    arr.push(...items) --> add items at the end...
+    arr.pop() --> remove item from the last...
+    arr.shift() --> extracts an item from the beginning...
+    arr.unshift(...items) --> add items in the beginning...
+
+    to access the last index we can use arr[-1] as the index...
+
+    alert( String(arr) === '1,2,3' ); ==> true
+
+    alert( [] + 1 ); // "1"
+    alert( [1] + 1 ); // "11"
+    alert( [1,2] + 1 ); // "1,21"
+
+    Donot use == operator to compare arrays, it will treat arrays as objects and problem is created...
+    alert( [] == [] ); // false
+    alert( [0] == [0] ); // false
+    alert( 0 == [] ); // true
+    alert('0' == [] ); // false
+
+    Slice method for string =>
+        let str = "stringify";
+        alert( str.slice(2) ); // 'ringify', from the 2nd position till the end
+
+        let str = "stringify";
+        // start at the 4th position from the right, end at the 1st from the right
+        alert( str.slice(-4, -1) ); // 'gif'
+
+        let str = "stringify";
+        // these are same for substring
+        alert( str.substring(2, 6) ); // "ring"
+        alert( str.substring(6, 2) ); // "ring"
+        // ...but not for slice:
+        alert( str.slice(2, 6) ); // "ring" (the same)
+        alert( str.slice(6, 2) ); // "" (an empty string)
+
+        let str = "stringify";
+        alert( str.substr(2, 4) ); // 'ring', from the 2nd position get 4 characters
+        let str = "stringify";
+        alert( str.substr(-4, 2) ); // 'gi'
+
+Splice method for arrays =>
+    let arr = ["I", "study", "JavaScript"];
+    arr.splice(1, 1); // from index 1 remove 1 element
+    alert( arr ); // ["I", "JavaScript"]
+
+    let arr = ["I", "study", "JavaScript", "right", "now"];
+    // remove 3 first elements and replace them with another
+    arr.splice(0, 3, "Let's", "dance");
+    alert( arr ) // now ["Let's", "dance", "right", "now"]
+
+    let arr = ["I", "study", "JavaScript", "right", "now"];
+    // remove 2 first elements
+    let removed = arr.splice(0, 2);
+    alert( removed ); // "I", "study" <-- array of removed elements
+
+    let arr = [1, 2, 5];
+    // from index -1 (one step from the end)
+    // delete 0 elements,
+    // then insert 3 and 4
+    arr.splice(-1, 0, 3, 4);
+    alert( arr ); // 1,2,3,4,5
+
+Concat method =>
+    let arr = [1, 2];
+    // create an array from: arr and [3,4]
+    alert( arr.concat([3, 4]) ); // 1,2,3,4
+    // create an array from: arr and [3,4] and [5,6]
+    alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
+    // create an array from: arr and [3,4], then add values 5 and 6
+    alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
+
+    Add an object to an array ->
+        let arr = [1, 2];
+        let arrayLike = {
+            0: "something",
+            length: 1
+        };
+        alert( arr.concat(arrayLike) ); // 1,2,[object Object]
+
+        let arr = [1, 2];
+        let arrayLike = {
+            0: "something",
+            1: "else",
+            [Symbol.isConcatSpreadable]: true,
+            length: 2
+        };
+        alert( arr.concat(arrayLike) ); // 1,2,something,else
+
+    Searching =>
+        let arr = [1, 0, false];
+        alert( arr.indexOf(0) ); // 1
+        alert( arr.indexOf(false) ); // 2
+        alert( arr.indexOf(null) ); // -1
+        alert( arr.includes(1) ); // true
+
+        let fruits = ['Apple', 'Orange', 'Apple']
+        alert( fruits.indexOf('Apple') ); // 0 (first Apple)
+        alert( fruits.lastIndexOf('Apple') ); // 2 (last Apple)
+
+        A minor, but noteworthy feature of includes is that it correctly handles NaN, unlike indexOf:
+        const arr = [NaN];
+        alert( arr.indexOf(NaN) ); // -1 (wrong, should be 0)
+        alert( arr.includes(NaN) );// true (correct)
+
+        find method -->
+            let users = [
+                {id: 1, name: "John"},
+                {id: 2, name: "Pete"},
+                {id: 3, name: "Mary"},
+                {id: 4, name: "John"},
+            ];
+            let user = users.find(item => item.id == 1);
+            alert(user.name); // John
+            alert(users.findIndex(user => user.name == 'John')); // 0
+            alert(users.findLastIndex(user => user.name == 'John')); // 3
+
+            filter-->
+            let someUsers = users.filter(item => item.id < 3);
+            alert(someUsers.length); // 2
+
+            map --> transform an array
+            let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
+            alert(lengths); // 5,7,6 ==> lengths array has now different values...
+
+            **When we need to iterate over an array – we can use forEach, for or for..of.
+            **When we need to iterate and return the data for each element – we can use map.
+
+            sort -->
+            let arr = [ 1, 2, 15 ];
+            // the method reorders the content of arr
+            arr.sort();
+            alert( arr );  // 1, 15, 2
+            It sorts alphabetically(in a dictionary order), to get our desired result ---> we write our own function and pass in it as argument in sort() ====>
+            ---->
+            Actually, a comparison function is only required to return a positive number to say “greater” and a negative number to say “less”.
+            function compareNumeric(a, b) {
+                if (a > b) return 1;
+                if (a == b) return 0;
+                if (a < b) return -1;
+            }
+            arr.sort(compareNumeric);
+            alert(arr); // 1, 2, 15
+
+            arr.sort( (a, b) => a - b ); //even better...
+
+            reverse -->
+            let arr = [1, 2, 3, 4, 5];
+            arr.reverse();
+            alert( arr ); // 5,4,3,2,1
+
+            **difference b/w of and in => in gives index no whereas of gives the element itself in that particular iteration**
+
+            Split -->
+            let names = 'Bilbo, Gandalf, Nazgul';
+            let arr = names.split(', ');
+            for (let name of arr) {
+                alert( `A message to ${name}.` ); // A message to Bilbo  (and other names)
+            }
+
+            let str = "test";
+            alert( str.split('') ); // t,e,s,t
+
+            Join -->
+            let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
+            let str = arr.join(';'); // glue the array into a string using ;
+            alert( str ); // Bilbo;Gandalf;Nazgul
+
+
+
+
